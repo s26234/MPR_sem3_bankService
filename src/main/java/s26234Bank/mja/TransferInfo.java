@@ -1,10 +1,10 @@
 package s26234Bank.mja;
 
-public class TarnsferInfo {
+public class TransferInfo {
 
     private double saldo;
 
-    public TarnsferInfo (double saldo) {
+    public TransferInfo(double saldo) {
         this.saldo = saldo;
     }
 
