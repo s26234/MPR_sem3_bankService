@@ -4,31 +4,53 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 public class BankService {
-    private final BankStorage bankStorage;
-    private final TransferStorage transferStorage;
+    private ClientStorage clientStorage;
+    private BankStorage bankStorage;
 
-    public BankService (BankStorage bankStorage, TransferStorage transferStorage) {
+    public BankService(ClientStorage clientStorage, BankStorage bankStorage) {
+        this.clientStorage = clientStorage;
         this.bankStorage = bankStorage;
-        this.transferStorage = transferStorage;
     }
 
-    public List<Transfer> getAllTransfers() {
-        return bankStorage.getCashList();
+    public Banker registerUser (Client client, int id, String status, int saldo) {
+        //dodanie Client a do storage
+        clientStorage.addClient(client);
+        //dodanie wszystkiego do bankstorageu
+        bankStorage.addBanker(new Banker(client, id,status, saldo));
+        //zwrot registera
+        return bankStorage.getBankerById(id);
     }
 
-    public TransferInfo transferCash(User user, Integer id) {
-        Money cash = bankStorage.findMoney(id);
-        List<Transfer> transferList = transferStorage.getTransferList();
+    public Banker removeSaldoOfId(int id, double removeSaldo){
+        return bankStorage.removeSaldoOfId(id, removeSaldo);
     }
 
-    if(cash==null) {
-        System.out.println("Brak mozliwosci wyplacenia");
-        return null;
+    public Banker addToSaldoOfId(int id, double addSaldo){
+        return bankStorage.addToSaldoOfId(id, addSaldo);
     }
 
-//    boolean noUser = false;
-//    for  noUser
-//
+    public Banker getBankerOfId(int id){
+        return bankStorage.getBankerOfId(id);
+    }
 
+    public List<Client> getAllClients(){
+        return clientStorage.getClientList();
+    }
+
+    public List<Banker> getAllBankers(){
+        return bankStorage.getBankerList();
+    }
+
+    public String getBankerStatusOfId(int id){
+        return bankStorage.getBankerStatusOfId(id);
+    }
+
+    public String setBankerStatusOfId(int id, String status){
+        return bankStorage.setBankerStatusOfId(id, status);
+    }
+
+    public double getBankerSaldoOfId(int id){
+        return bankStorage.getBankerSaldoOfId(id);
+    }
 
 }

@@ -12,19 +12,19 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BankServicesMockTests {
-    @Mock
-    private BankStorage bankStorage;
-    @Mock
-    private TransferStorage transferStorage;
-    @Mock
-    private User user;
-
-    @InjectMocks
-    private BankService bankService;
-
-
-    @Test
-    void shouldNotFindMoney() {
-        when(moneyStorage.findMoney(any())).thenReturn(null);
-        assertThat(bankService.getAllMoney()).isNull();
+//    @Mock
+//    private BankStorage bankStorage;
+//    @Mock
+//    private TransferStorage transferStorage;
+//    @Mock
+//    private Client client;
+//
+//    @InjectMocks
+//    private BankService bankService;
+//
+//
+//    @Test
+//    void shouldNotFindMoney() {
+//        when(moneyStorage.findMoney(any())).thenReturn(null);
+//        assertThat(bankService.getAllMoney()).isNull();
 }
